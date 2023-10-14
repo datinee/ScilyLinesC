@@ -5,31 +5,37 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Data.OleDb;
 using System.Data.OracleClient;
 using MySql.Data.MySqlClient;
-using ScilyLines.Controleur;
-using ScilyLines.Modele;
+using Connecte.Controleur;
+using Connecte.Modele;
 
-namespace ScilyLines
+
+namespace Connecte
 {
     public partial class Form1 : Form
     {
+
         Mgr monManager;
-        List<Secteur> lSec = new List<Secteur>();
+
+        List<Secteur> lEmp = new List<Secteur>();
+
+
 
         public Form1()
         {
             InitializeComponent();
+
             monManager = new Mgr();
         }
+
         private void Form1_Load(object sender, EventArgs e)
         {
 
 
-            lSec = monManager.chargementSecBD();
+            lEmp = monManager.chargementEmpBD();
 
 
             affiche();
@@ -44,9 +50,9 @@ namespace ScilyLines
             {
 
 
-                listBoxSecteur.DataSource = null;
-                listBoxSecteur.DataSource = lSec;
-                listBoxSecteur.DisplayMember = "Description";
+                listBoxEmploye.DataSource = null;
+                listBoxEmploye.DataSource = lEmp;
+                listBoxEmploye.DisplayMember = "Description";
 
 
             }
@@ -60,9 +66,80 @@ namespace ScilyLines
 
         }
 
-        private void Form1_Load_1(object sender, EventArgs e)
+
+
+
+
+
+
+
+        private void button1_Click(object sender, EventArgs e)
         {
 
+            try
+            {
+                // Récuperer l'indice de l'employé selectionné dans la listBox
+                /* int i = listBoxEmploye.SelectedIndex;
+                 * 
+                 * Récupérer l'employé selectionné à partir de la collection lEmp
+                 * Employe emp = lEmp[i];
+                 */
+
+                // Récupérer directement l'employé selectionné
+
+                Secteur emp = (Secteur)listBoxEmploye.SelectedItem;
+
+                emp.Libelle = tbLogin.Text;
+
+                monManager.updateEmploye(emp);
+
+                lEmp = monManager.chargementEmpBD();
+
+
+                affiche();
+
+            }
+
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+
+            }
+
+
+
         }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+
+
+            // A compléter
+
+            affiche();
+
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            // à compléter
+
+            affiche();
+        }
+
+
+
     }
+
+
 }
+
+
+
+
+
+
+
+
+
+

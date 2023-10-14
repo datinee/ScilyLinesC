@@ -6,22 +6,41 @@ using System.Threading.Tasks;
 using Connecte.DAL;
 using Connecte.Modele;
 
+
 namespace Connecte.Controleur
 {
     public class Mgr
     {
-        SecteurDAO esecDAO = new SecteurDAO();
 
-        List<Secteur> maListeSecteur;
+        SecteurDAO empDAO = new SecteurDAO();
 
-        public Mgr() {
-            maListeSecteur = new List<Secteur>();
-                }
+        List<Secteur> maListeEmploye;
 
-        public List<Secteur> chargementSecBD()
+        public Mgr()
         {
-            maListeSecteur = SecteurDAO.;
-            return (maListeSecteur);
+
+            maListeEmploye = new List<Secteur>();
         }
+
+
+
+        // Récupération de la liste des employés à partir de la DAL
+        public List<Secteur> chargementEmpBD()
+        {
+
+            maListeEmploye = SecteurDAO.getEmployes();
+
+            return (maListeEmploye);
+        }
+
+
+        // Mise à jour d'un employé  dans la DAL
+        public void updateEmploye(Secteur e)
+        {
+
+            SecteurDAO.updateEmploye(e);
+
+        }
+
     }
 }

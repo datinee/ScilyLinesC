@@ -8,6 +8,10 @@ using MySql.Data.MySqlClient;
 
 namespace Connecte
 {
+
+    /**
+     * Classe de connexion à une base de données
+     */
     public class ConnexionSql
     {
         private static ConnexionSql connection = null;
@@ -118,6 +122,4 @@ namespace Connecte
 
     }
 
-
-    }
-
+}
