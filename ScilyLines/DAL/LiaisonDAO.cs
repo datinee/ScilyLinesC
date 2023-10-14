@@ -8,7 +8,7 @@ using Connecte.Modele;
 
 namespace Connecte.DAL
 {
-    public class SecteurDAO
+    public class LiaisonDAO
     {
 
         // attributs de connexion statiques
@@ -29,10 +29,10 @@ namespace Connecte.DAL
 
 
         // Récupération de la liste des employés
-        public static List<Secteur> getSecteurs()
+        public static List<Liaison> getLiaisons()
         {
 
-            List<Secteur> lc = new List<Secteur>();
+            List<Liaison> lc = new List<Liaison>();
 
             try
             {
@@ -43,12 +43,12 @@ namespace Connecte.DAL
                 maConnexionSql.openConnection();
 
 
-                Ocom = maConnexionSql.reqExec("Select * from secteur");
+                Ocom = maConnexionSql.reqExec("SELECT * FROM secteur");
 
 
                 MySqlDataReader reader = Ocom.ExecuteReader();
 
-                Secteur s;
+                Liaison l;
 
 
 
@@ -57,12 +57,16 @@ namespace Connecte.DAL
                 {
 
                     int id = (int)reader.GetValue(0);
-                    string libelle = (string)reader.GetValue(1);
+                    int idSecteur = (int)reader.GetValue(1);
+                    int idPortDepart = (int)reader.GetValue(2);
+                    int idPortArrivee = (int)reader.GetValue(3);
+                    int duree = (int)reader.GetValue(4);
+
                     //Instanciation d'un Emplye
-                    s = new Secteur(id, libelle);
+                    l = new Liaison(id, idSecteur, idPortDepart, idPortArrivee, duree);
 
                     // Ajout de cet employe à la liste 
-                    lc.Add(s);
+                    lc.Add(l);
 
 
                 }

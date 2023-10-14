@@ -35,14 +35,14 @@ namespace Connecte
                 {
                     mysqlCn = new MySqlConnection(connString);
                 }
-                catch (Exception emp)
+                catch (Exception sec)
                 {
-                    throw (emp);
+                    throw (sec);
                 }
             }
-            catch (Exception emp)
+            catch (Exception sec)
             {
-                throw (emp);
+                throw (sec);
             }
 
 
@@ -71,9 +71,9 @@ namespace Connecte
                     }
 
                 }
-                catch (Exception emp)
+                catch (Exception sec)
                 {
-                    throw (emp);
+                    throw (sec);
 
 
                 }
@@ -95,9 +95,9 @@ namespace Connecte
             {
                 mysqlCn.Open();
             }
-            catch (Exception emp)
+            catch (Exception sec)
             {
-                throw (emp);
+                throw (sec);
             }
         }
 

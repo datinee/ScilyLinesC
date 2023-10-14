@@ -19,8 +19,10 @@ namespace Connecte
     {
 
         Mgr monManager;
+        MgrLiaison manager;
 
-        List<Secteur> lEmp = new List<Secteur>();
+        List<Secteur> lSec = new List<Secteur>();
+        List<Liaison> lLia = new List<Liaison>();
 
 
 
@@ -29,13 +31,14 @@ namespace Connecte
             InitializeComponent();
 
             monManager = new Mgr();
+            manager = new MgrLiaison();
         }
 
         private void Form1_Load(object sender, EventArgs e)
         {
 
 
-            lEmp = monManager.chargementEmpBD();
+            lSec = monManager.chargementSecBD();
 
 
             affiche();
@@ -50,9 +53,9 @@ namespace Connecte
             {
 
 
-                listBoxEmploye.DataSource = null;
-                listBoxEmploye.DataSource = lEmp;
-                listBoxEmploye.DisplayMember = "Description";
+                listBoxSecteur.DataSource = null;
+                listBoxSecteur.DataSource = lSec;
+                listBoxSecteur.DisplayMember = "Description";
 
 
             }
@@ -66,69 +69,18 @@ namespace Connecte
 
         }
 
-
-
-
-
-
-
-
-        private void button1_Click(object sender, EventArgs e)
+        private void btn_Click(object sender, EventArgs e)
         {
-
-            try
-            {
-                // Récuperer l'indice de l'employé selectionné dans la listBox
-                /* int i = listBoxEmploye.SelectedIndex;
-                 * 
-                 * Récupérer l'employé selectionné à partir de la collection lEmp
-                 * Employe emp = lEmp[i];
-                 */
-
-                // Récupérer directement l'employé selectionné
-
-                Secteur emp = (Secteur)listBoxEmploye.SelectedItem;
-
-                emp.Libelle = tbLogin.Text;
-
-                monManager.updateEmploye(emp);
-
-                lEmp = monManager.chargementEmpBD();
-
-
-                affiche();
-
-            }
-
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-
-            }
-
-
+            listBoxSecteur.Visible = false;
+            listBoxLiaison.Visible = true;
 
         }
 
-        private void button2_Click(object sender, EventArgs e)
+        private void listBoxLiaison_SelectedIndexChanged(object sender, EventArgs e)
         {
-
-
-            // A compléter
-
-            affiche();
-
-        }
-
-        private void button3_Click(object sender, EventArgs e)
-        {
-            // à compléter
-
+            lLia = manager.chargementLiaBD();
             affiche();
         }
-
-
-
     }
 
 

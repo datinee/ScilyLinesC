@@ -12,34 +12,26 @@ namespace Connecte.Controleur
     public class Mgr
     {
 
-        SecteurDAO empDAO = new SecteurDAO();
+        SecteurDAO secDAO = new SecteurDAO();
 
-        List<Secteur> maListeEmploye;
+        List<Secteur> maListeSecteur;
+
 
         public Mgr()
         {
 
-            maListeEmploye = new List<Secteur>();
+            maListeSecteur = new List<Secteur>();
         }
 
 
 
         // Récupération de la liste des employés à partir de la DAL
-        public List<Secteur> chargementEmpBD()
+        public List<Secteur> chargementSecBD()
         {
 
-            maListeEmploye = SecteurDAO.getEmployes();
+            maListeSecteur = SecteurDAO.getSecteurs();
 
-            return (maListeEmploye);
-        }
-
-
-        // Mise à jour d'un employé  dans la DAL
-        public void updateEmploye(Secteur e)
-        {
-
-            SecteurDAO.updateEmploye(e);
-
+            return (maListeSecteur);
         }
 
     }
