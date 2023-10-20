@@ -25,12 +25,6 @@ namespace Connecte.Modele
             this.libelle = unLibelle;
         }
 
-        // Constructeur vide
-        public Secteur()
-        {
-
-
-        }
 
 
         // pour afficher la liste par la suite
