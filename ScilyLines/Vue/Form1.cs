@@ -18,11 +18,9 @@ namespace Connecte
     public partial class Form1 : Form
     {
 
-        Mgr monManager;
-        MgrLiaison manager;
+        Mgr monMgr;
 
         List<Secteur> lSec = new List<Secteur>();
-        List<Liaison> lLia = new List<Liaison>();
 
 
 
@@ -30,19 +28,19 @@ namespace Connecte
         {
             InitializeComponent();
 
-            monManager = new Mgr();
-            manager = new MgrLiaison();
+            monMgr = new Mgr();
         }
 
         private void Form1_Load(object sender, EventArgs e)
         {
 
 
-            lSec = monManager.chargementSecBD();
+            lSec = monMgr.chargementSecBD();
 
 
             affiche();
         }
+
 
         public void affiche()
 
@@ -71,16 +69,13 @@ namespace Connecte
 
         private void btn_Click(object sender, EventArgs e)
         {
-            listBoxSecteur.Visible = false;
-            listBoxLiaison.Visible = true;
+            Secteur s = (Secteur)listBoxSecteur.SelectedItem;
+            Form2 Form2 = new Form2(s);
+            Form2.ShowDialog();
+            
 
         }
 
-        private void listBoxLiaison_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            lLia = manager.chargementLiaBD();
-            affiche();
-        }
     }
 
 

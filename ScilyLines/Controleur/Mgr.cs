@@ -16,11 +16,16 @@ namespace Connecte.Controleur
 
         List<Secteur> maListeSecteur;
 
+        LiaisonDAO liaDao = new LiaisonDAO();
+
+        List<Liaison> maListeLiason;
+
 
         public Mgr()
         {
 
             maListeSecteur = new List<Secteur>();
+            maListeLiason = new List<Liaison>();
         }
 
 
@@ -32,6 +37,12 @@ namespace Connecte.Controleur
             maListeSecteur = SecteurDAO.getSecteurs();
 
             return (maListeSecteur);
+        }
+
+        public List<Liaison> chargementLiaBD(Secteur unSec)
+        {
+            maListeLiason = LiaisonDAO.getLiaisons(unSec);
+            return (maListeLiason);
         }
 
     }

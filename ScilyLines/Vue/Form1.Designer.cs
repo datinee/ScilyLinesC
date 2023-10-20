@@ -30,7 +30,6 @@
         {
             this.listBoxSecteur = new System.Windows.Forms.ListBox();
             this.btn = new System.Windows.Forms.Button();
-            this.listBoxLiaison = new System.Windows.Forms.ListBox();
             this.SuspendLayout();
             // 
             // listBoxSecteur
@@ -52,22 +51,11 @@
             this.btn.UseVisualStyleBackColor = true;
             this.btn.Click += new System.EventHandler(this.btn_Click);
             // 
-            // listBoxLiaison
-            // 
-            this.listBoxLiaison.FormattingEnabled = true;
-            this.listBoxLiaison.ItemHeight = 16;
-            this.listBoxLiaison.Location = new System.Drawing.Point(108, 32);
-            this.listBoxLiaison.Name = "listBoxLiaison";
-            this.listBoxLiaison.Size = new System.Drawing.Size(736, 324);
-            this.listBoxLiaison.TabIndex = 25;
-            this.listBoxLiaison.Visible = false;
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1161, 624);
-            this.Controls.Add(this.listBoxLiaison);
             this.Controls.Add(this.btn);
             this.Controls.Add(this.listBoxSecteur);
             this.Margin = new System.Windows.Forms.Padding(4);
@@ -81,7 +69,6 @@
         #endregion
         private System.Windows.Forms.ListBox listBoxSecteur;
         private System.Windows.Forms.Button btn;
-        private System.Windows.Forms.ListBox listBoxLiaison;
     }
 }
 

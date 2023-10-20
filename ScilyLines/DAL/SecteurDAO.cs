@@ -56,10 +56,10 @@ namespace Connecte.DAL
                 while (reader.Read())
                 {
 
-                    int id = (int)reader.GetValue(0);
+                    int idSecteur = (int)reader.GetValue(0);
                     string libelle = (string)reader.GetValue(1);
                     //Instanciation d'un Emplye
-                    s = new Secteur(id, libelle);
+                    s = new Secteur(idSecteur, libelle);
 
                     // Ajout de cet employe à la liste 
                     lc.Add(s);
@@ -88,6 +88,8 @@ namespace Connecte.DAL
 
 
         }
+       
+
 
     }
 

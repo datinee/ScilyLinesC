@@ -28,8 +28,7 @@ namespace Connecte.DAL
         private static MySqlCommand Ocom;
 
 
-        // Récupération de la liste des employés
-        public static List<Liaison> getLiaisons()
+        public static List<Liaison> getLiaisons(Secteur unSec)
         {
 
             List<Liaison> lc = new List<Liaison>();
@@ -42,8 +41,8 @@ namespace Connecte.DAL
 
                 maConnexionSql.openConnection();
 
-
-                Ocom = maConnexionSql.reqExec("SELECT * FROM secteur");
+                ;
+                Ocom = maConnexionSql.reqExec("SELECT * FROM liaison join secteur on secteur.idSecteur = liaison.idSecteur where liaison.idSecteur= " + unSec.IdSecteur);
 
 
                 MySqlDataReader reader = Ocom.ExecuteReader();
@@ -52,20 +51,16 @@ namespace Connecte.DAL
 
 
 
-
                 while (reader.Read())
                 {
 
                     int id = (int)reader.GetValue(0);
-                    int idSecteur = (int)reader.GetValue(1);
-                    int idPortDepart = (int)reader.GetValue(2);
-                    int idPortArrivee = (int)reader.GetValue(3);
-                    int duree = (int)reader.GetValue(4);
+                    int idPortDepart = (int)reader.GetValue(1);
+                    int idPortArrivee = (int)reader.GetValue(2);
+                    string duree = (string)reader.GetValue(3);
 
-                    //Instanciation d'un Emplye
-                    l = new Liaison(id, idSecteur, idPortDepart, idPortArrivee, duree);
+                    l = new Liaison(id, idPortDepart, idPortArrivee, duree);
 
-                    // Ajout de cet employe à la liste 
                     lc.Add(l);
 
 
@@ -83,10 +78,10 @@ namespace Connecte.DAL
 
             }
 
-            catch (Exception sec)
+            catch (Exception emp)
             {
 
-                throw (sec);
+                throw (emp);
 
             }
 
