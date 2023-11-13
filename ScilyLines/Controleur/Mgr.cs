@@ -30,7 +30,6 @@ namespace Connecte.Controleur
 
 
 
-        // Récupération de la liste des employés à partir de la DAL
         public List<Secteur> chargementSecBD()
         {
 
