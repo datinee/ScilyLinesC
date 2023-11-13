@@ -38,9 +38,9 @@ namespace Connecte.Controleur
             return (maListeSecteur);
         }
 
-        public List<Liaison> chargementLiaBD(Secteur unSec)
+        public List<Liaison> chargementLiaBD(Secteur idSec)
         {
-            maListeLiason = LiaisonDAO.getLiaisons(unSec);
+            maListeLiason = LiaisonDAO.getLiaisons(idSec);
             return (maListeLiason);
         }
 

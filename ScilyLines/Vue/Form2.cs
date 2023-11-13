@@ -17,7 +17,7 @@ namespace Connecte
 {
     public partial class Form2 : Form
     {
-        Secteur unSecteur;
+        Secteur unSec;
         Mgr monMgr;
 
 
@@ -28,14 +28,18 @@ namespace Connecte
             InitializeComponent();
             monMgr = new Mgr();
 
-            unSecteur =  s;
+            unSec =  s;
+            Liaison l = (Liaison)listBoxLiaison.SelectedItem;
+
+            txtbIdSecteur.Text = Convert.ToString(unSec.IdSecteur);
+
         }
 
         private void Form2_Load(object sender, EventArgs e)
         {
 
 
-            lLia = monMgr.chargementLiaBD(unSecteur);
+            lLia = monMgr.chargementLiaBD(unSec);
 
             afficher();
         }
@@ -67,9 +71,9 @@ namespace Connecte
         private void btnMaj_Click(object sender, EventArgs e)
         {
             Liaison l = (Liaison)listBoxLiaison.SelectedItem;
-            l.Duree = Convert.ToInt32(txtbMajDuree.Text);
+            l.Duree = txtbMajDuree.Text;
             monMgr.updateLiaison(l);
-            lLia = monMgr.chargementLiaBD(unSecteur);
+            lLia = monMgr.chargementLiaBD(unSec);
             afficher();
         }
 
@@ -77,19 +81,18 @@ namespace Connecte
         {
             Liaison l = (Liaison)listBoxLiaison.SelectedItem;
             monMgr.deleteLiaison(l);
-            lLia = monMgr.chargementLiaBD(unSecteur);
+            lLia = monMgr.chargementLiaBD(unSec);
             afficher();
         }
 
         private void btnIns_Click(object sender, EventArgs e)
         {
             Liaison l = (Liaison)listBoxLiaison.SelectedItem;
-            l.UnSecteur = unSecteur;
             l.IdPortDepart = Convert.ToInt32(txtbPortD.Text);
             l.IdPortArrivee = Convert.ToInt32(txtbPortA.Text);
-            l.Duree= Convert.ToInt32(txtbDuree.Text);
+            l.Duree= txtbDuree.Text;
             monMgr.insertLiaison(l);
-            lLia = monMgr.chargementLiaBD(unSecteur);
+            lLia = monMgr.chargementLiaBD(unSec);
             afficher();
 
         }

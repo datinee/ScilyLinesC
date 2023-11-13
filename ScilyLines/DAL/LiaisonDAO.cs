@@ -28,7 +28,7 @@ namespace Connecte.DAL
         private static MySqlCommand Ocom;
 
 
-        public static List<Liaison> getLiaisons(Secteur unSec)
+        public static List<Liaison> getLiaisons(Secteur idSec)
         {
 
             List<Liaison> lc = new List<Liaison>();
@@ -42,7 +42,7 @@ namespace Connecte.DAL
                 maConnexionSql.openConnection();
 
                 ;
-                Ocom = maConnexionSql.reqExec("SELECT * FROM liaison  where liaison.idSecteur= " + unSec.IdSecteur);
+                Ocom = maConnexionSql.reqExec("SELECT * FROM liaison  where liaison.idSecteur= " + idSec.IdSecteur);
 
 
                 MySqlDataReader reader = Ocom.ExecuteReader();
@@ -55,11 +55,12 @@ namespace Connecte.DAL
                 {
 
                     int id = (int)reader.GetValue(0);
-                    int idPortDepart = (int)reader.GetValue(1);
-                    int idPortArrivee = (int)reader.GetValue(2);
-                    int duree = (int)reader.GetValue(3);
+                    int idSecteur =(int)reader.GetValue(1);
+                    int idPortDepart = (int)reader.GetValue(2);
+                    int idPortArrivee = (int)reader.GetValue(3);
+                    string duree = (string)reader.GetValue(4);
 
-                    l = new Liaison(id, idPortDepart, idPortArrivee, duree);
+                    l = new Liaison(id,idSecteur, idPortDepart, idPortArrivee, duree);
 
                     lc.Add(l);
 
@@ -140,7 +141,7 @@ namespace Connecte.DAL
                 maConnexionSql.openConnection();
 
                 ;
-                Ocom = maConnexionSql.reqExec("insert into Liaison(idSecteur, idPortDepart, idPortArrivee, duree) values (" + l.IdPortDepart+ "," + l.IdPortArrivee + "," + l.Duree);
+                Ocom = maConnexionSql.reqExec($"insert into Liaison(idSecteur, idPortDepart, idPortArrivee, duree) values ({l.IdSecteur}, {l.IdPortDepart}, {l.IdPortArrivee}, {l.Duree})");
 
                 int i = Ocom.ExecuteNonQuery();
 
