@@ -64,5 +64,34 @@ namespace Connecte
 
         }
 
+        private void btnMaj_Click(object sender, EventArgs e)
+        {
+            Liaison l = (Liaison)listBoxLiaison.SelectedItem;
+            l.Duree = Convert.ToInt32(txtbMajDuree.Text);
+            monMgr.updateLiaison(l);
+            lLia = monMgr.chargementLiaBD(unSecteur);
+            afficher();
+        }
+
+        private void btnSup_Click(object sender, EventArgs e)
+        {
+            Liaison l = (Liaison)listBoxLiaison.SelectedItem;
+            monMgr.deleteLiaison(l);
+            lLia = monMgr.chargementLiaBD(unSecteur);
+            afficher();
+        }
+
+        private void btnIns_Click(object sender, EventArgs e)
+        {
+            Liaison l = (Liaison)listBoxLiaison.SelectedItem;
+            l.UnSecteur = unSecteur;
+            l.IdPortDepart = Convert.ToInt32(txtbPortD.Text);
+            l.IdPortArrivee = Convert.ToInt32(txtbPortA.Text);
+            l.Duree= Convert.ToInt32(txtbDuree.Text);
+            monMgr.insertLiaison(l);
+            lLia = monMgr.chargementLiaBD(unSecteur);
+            afficher();
+
+        }
     }
 }

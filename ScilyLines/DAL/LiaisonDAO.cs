@@ -101,7 +101,9 @@ namespace Connecte.DAL
                 Ocom = maConnexionSql.reqExec("UPDATE liaison set duree = '"+ l.Duree + "'Where idLiaison = "+ l.Id);
 
 
-                MySqlDataReader reader = Ocom.ExecuteReader();
+                int i = Ocom.ExecuteNonQuery();
+
+                maConnexionSql.closeConnection();
 
             }
             catch (Exception emp) { throw (emp);}
@@ -121,8 +123,9 @@ namespace Connecte.DAL
                 Ocom = maConnexionSql.reqExec("delete from liaison where idLiaison = " + l.Id);
 
 
-                MySqlDataReader reader = Ocom.ExecuteReader();
+                int i = Ocom.ExecuteNonQuery();
 
+                maConnexionSql.closeConnection();
             }
             catch (Exception emp) { throw (emp); }
         }
@@ -139,8 +142,9 @@ namespace Connecte.DAL
                 ;
                 Ocom = maConnexionSql.reqExec("insert into Liaison(idSecteur, idPortDepart, idPortArrivee, duree) values (" + l.IdPortDepart+ "," + l.IdPortArrivee + "," + l.Duree);
 
-                MySqlDataReader reader = Ocom.ExecuteReader();
+                int i = Ocom.ExecuteNonQuery();
 
+                maConnexionSql.closeConnection();
             }
             catch (Exception emp) { throw (emp); }
         }
