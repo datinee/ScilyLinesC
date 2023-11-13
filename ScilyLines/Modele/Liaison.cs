@@ -12,9 +12,9 @@ namespace Connecte.Modele
         private Secteur unSecteur;
         private int idPortDepart;
         private int idPortArrivee;
-        private string duree;
+        private int duree;
 
-        public Liaison(int idLiaison, int idPortDepart, int idPortArrivee, string duree)
+        public Liaison(int idLiaison, int idPortDepart, int idPortArrivee, int duree)
         {
             this.idLiaison = idLiaison;
             this.idPortDepart = idPortDepart;
@@ -24,12 +24,12 @@ namespace Connecte.Modele
 
         public string Description
         {
-            get => "Id : " + this.idLiaison + " IdPortDepart :" + this.idPortDepart + " IdPortArrivee :" + this.idPortArrivee + " Duree :" + this.duree;
+            get => "Id : " + this.idLiaison + " " +" IdPortDepart :" + this.idPortDepart + " " + " IdPortArrivee :" + this.idPortArrivee + " " + " Duree :" + this.duree;
         }
         public int Id { get => idLiaison; set => idLiaison = value; }
         public int IdPortDepart { get => idPortDepart; set => idPortDepart = value; }
         public int IdPortArrivee { get => idPortArrivee; set => idPortArrivee = value; }
-        public string Duree { get => duree; set => duree = value; }
+        public int Duree { get => duree; set => duree = value; }
         public Secteur UnSecteur { get => unSecteur; set => unSecteur = value; }
     }
 }

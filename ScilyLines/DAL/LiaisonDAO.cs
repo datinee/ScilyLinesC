@@ -42,7 +42,7 @@ namespace Connecte.DAL
                 maConnexionSql.openConnection();
 
                 ;
-                Ocom = maConnexionSql.reqExec("SELECT * FROM liaison join secteur on secteur.idSecteur = liaison.idSecteur where liaison.idSecteur= " + unSec.IdSecteur);
+                Ocom = maConnexionSql.reqExec("SELECT * FROM liaison  where liaison.idSecteur= " + unSec.IdSecteur);
 
 
                 MySqlDataReader reader = Ocom.ExecuteReader();
@@ -57,7 +57,7 @@ namespace Connecte.DAL
                     int id = (int)reader.GetValue(0);
                     int idPortDepart = (int)reader.GetValue(1);
                     int idPortArrivee = (int)reader.GetValue(2);
-                    string duree = (string)reader.GetValue(3);
+                    int duree = (int)reader.GetValue(3);
 
                     l = new Liaison(id, idPortDepart, idPortArrivee, duree);
 
@@ -87,6 +87,65 @@ namespace Connecte.DAL
 
 
         }
+        public static void updateLiaison(Liaison l)
+        {
+            try
+            {
+
+                maConnexionSql = ConnexionSql.getInstance(provider, dataBase, uid, mdp);
+
+
+                maConnexionSql.openConnection();
+
+                ;
+                Ocom = maConnexionSql.reqExec("UPDATE liaison set duree = '"+ l.Duree + "'Where idLiaison = "+ l.Id);
+
+
+                MySqlDataReader reader = Ocom.ExecuteReader();
+
+            }
+            catch (Exception emp) { throw (emp);}
+         }
+
+        public static void deleteLiaison(Liaison l)
+        {
+            try
+            {
+
+                maConnexionSql = ConnexionSql.getInstance(provider, dataBase, uid, mdp);
+
+
+                maConnexionSql.openConnection();
+
+                ;
+                Ocom = maConnexionSql.reqExec("delete from liaison where idLiaison = " + l.Id);
+
+
+                MySqlDataReader reader = Ocom.ExecuteReader();
+
+            }
+            catch (Exception emp) { throw (emp); }
+        }
+        public static void insertLiaison(Liaison l)
+        {
+            try
+            {
+
+                maConnexionSql = ConnexionSql.getInstance(provider, dataBase, uid, mdp);
+
+
+                maConnexionSql.openConnection();
+
+                ;
+                Ocom = maConnexionSql.reqExec("insert into Liaison(idSecteur, idPortDepart, idPortArrivee, duree) values (" + l.IdPortDepart+ "," + l.IdPortArrivee + "," + l.Duree);
+
+                MySqlDataReader reader = Ocom.ExecuteReader();
+
+            }
+            catch (Exception emp) { throw (emp); }
+        }
+
+
 
     }
 

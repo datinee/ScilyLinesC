@@ -44,5 +44,20 @@ namespace Connecte.Controleur
             return (maListeLiason);
         }
 
+        public void updateLiaison(Liaison l)
+        {
+            LiaisonDAO.updateLiaison(l);
+        }
+
+        public void insertLiaison(Liaison l)
+        {
+            LiaisonDAO.insertLiaison(l);
+        }
+
+        // Appel à la fonction qui supprime une liaiso
+        public void deleteLiaison(Liaison l)
+        {
+            LiaisonDAO.deleteLiaison(l);
+        }
     }
 }
