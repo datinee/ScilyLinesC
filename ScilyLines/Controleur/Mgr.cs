@@ -24,7 +24,7 @@ namespace Connecte.Controleur
         public Mgr()
         {
 
-            maListeSecteur = new List<Secteur>();
+           
             maListeLiason = new List<Liaison>();
         }
 
