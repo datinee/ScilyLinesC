@@ -140,7 +140,7 @@ namespace Connecte.DAL
 
 
                 maConnexionSql.openConnection();
-                ;
+                
                 Ocom = maConnexionSql.reqExec("insert into Liaison(duree, idSecteur, idPortDepart, idPortArrivee) values ('" + l.Duree + "'," + l.IdSecteur + ", " + l.IdPortDepart + "," + l.IdPortArrivee + ");");
 
                 int i = Ocom.ExecuteNonQuery();
