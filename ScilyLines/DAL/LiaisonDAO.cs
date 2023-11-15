@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using MySql.Data.MySqlClient;
 using Connecte.Modele;
+using Org.BouncyCastle.Ocsp;
 
 namespace Connecte.DAL
 {
@@ -98,8 +99,8 @@ namespace Connecte.DAL
 
                 maConnexionSql.openConnection();
 
-                ;
-                Ocom = maConnexionSql.reqExec("UPDATE liaison set duree = '"+ l.Duree + "'Where idLiaison = "+ l.Id);
+                string req = "UPDATE liaison set duree = '" + l.Duree + "'Where idLiaison = " + l.Id;
+                Ocom = maConnexionSql.reqExec(req);
 
 
                 int i = Ocom.ExecuteNonQuery();
@@ -139,9 +140,8 @@ namespace Connecte.DAL
 
 
                 maConnexionSql.openConnection();
-
                 ;
-                Ocom = maConnexionSql.reqExec("insert into Liaison(idSecteur, idPortDepart, idPortArrivee, duree) values ('" + l.IdSecteur +" ," + l.IdPortDepart + "," + l.IdPortArrivee + "," + l.Duree);
+                Ocom = maConnexionSql.reqExec("insert into Liaison(duree, idSecteur, idPortDepart, idPortArrivee) values ('" + l.Duree + "'," + l.IdSecteur + ", " + l.IdPortDepart + "," + l.IdPortArrivee + ");");
 
                 int i = Ocom.ExecuteNonQuery();
 
