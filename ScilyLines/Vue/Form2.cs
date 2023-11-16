@@ -20,7 +20,7 @@ namespace Connecte
         Secteur unSec;
         Mgr monMgr;
 
-
+        List<Port> lPort = new List<Port>();
         List<Liaison> lLia = new List<Liaison>();
 
         public Form2(Secteur s)
@@ -40,11 +40,13 @@ namespace Connecte
 
 
             lLia = monMgr.chargementLiaBD(unSec);
+            lPort = monMgr.chargementPortBD();
 
-            afficher();
+            afficherLiaison();
+            afficherPort();
         }
 
-        public void afficher()
+        public void afficherLiaison()
 
         {
 
@@ -68,13 +70,37 @@ namespace Connecte
 
         }
 
+        public void afficherPort()
+
+        {
+
+            try
+            {
+
+
+                listBoxPort.DataSource = null;
+                listBoxPort.DataSource = lPort;
+                listBoxPort.DisplayMember = "Description";
+
+
+
+            }
+
+            catch (Exception ex)
+            {
+
+                MessageBox.Show(ex.Message);
+            }
+
+        }
+
         private void btnMaj_Click(object sender, EventArgs e)
         {
             Liaison l = (Liaison)listBoxLiaison.SelectedItem;
             l.Duree = txtbMajDuree.Text;
             monMgr.updateLiaison(l);
             lLia = monMgr.chargementLiaBD(unSec);
-            afficher();
+            afficherLiaison();
         }
 
         private void btnSup_Click(object sender, EventArgs e)
@@ -82,18 +108,18 @@ namespace Connecte
             Liaison l = (Liaison)listBoxLiaison.SelectedItem;
             monMgr.deleteLiaison(l);
             lLia = monMgr.chargementLiaBD(unSec);
-            afficher();
+            afficherLiaison();
         }
 
         private void btnIns_Click(object sender, EventArgs e)
         {
             Liaison l = (Liaison)listBoxLiaison.SelectedItem;
-            l.IdPortDepart = Convert.ToInt32(txtbPortD.Text);
-            l.IdPortArrivee = Convert.ToInt32(txtbPortA.Text);
+            l.IdPortDepart = txtbPortD.Text;
+            l.IdPortArrivee = txtbPortA.Text;
             l.Duree= txtbDuree.Text;
             monMgr.insertLiaison(l);
             lLia = monMgr.chargementLiaBD(unSec);
-            afficher();
+            afficherLiaison();
 
         }
     }

@@ -43,7 +43,7 @@ namespace Connecte.DAL
                 maConnexionSql.openConnection();
 
                 ;
-                Ocom = maConnexionSql.reqExec("SELECT * FROM liaison  where liaison.idSecteur= " + idSec.IdSecteur);
+                Ocom = maConnexionSql.reqExec("SELECT idLiaison, secteur.idSecteur, libelle, nom, duree FROM port join liaison JOIN secteur on idPort = idPortArrivee and liaison.idSecteur= secteur.idSecteur WHERE liaison.idSecteur= " + idSec.IdSecteur);
 
 
                 MySqlDataReader reader = Ocom.ExecuteReader();
@@ -57,8 +57,8 @@ namespace Connecte.DAL
 
                     int id = (int)reader.GetValue(0);
                     int idSecteur =(int)reader.GetValue(1);
-                    int idPortDepart = (int)reader.GetValue(2);
-                    int idPortArrivee = (int)reader.GetValue(3);
+                    string idPortDepart = (string)reader.GetValue(2);
+                    string idPortArrivee = (string)reader.GetValue(3);
                     string duree = (string)reader.GetValue(4);
 
                     l = new Liaison(id,idSecteur, idPortDepart, idPortArrivee, duree);

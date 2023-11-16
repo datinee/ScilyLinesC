@@ -21,11 +21,16 @@ namespace Connecte.Controleur
         List<Liaison> maListeLiason;
 
 
+        PortDAO portDAO = new PortDAO();
+        List<Port> maListePort;
+
+
         public Mgr()
         {
 
             maListeSecteur = new List<Secteur>();
             maListeLiason = new List<Liaison>();
+            maListePort = new List<Port>();
         }
 
 
@@ -58,6 +63,14 @@ namespace Connecte.Controleur
         public void deleteLiaison(Liaison l)
         {
             LiaisonDAO.deleteLiaison(l);
+        }
+
+        public List<Port> chargementPortBD()
+        {
+
+            maListePort = PortDAO.getPorts() ;
+
+            return (maListePort);
         }
     }
 }

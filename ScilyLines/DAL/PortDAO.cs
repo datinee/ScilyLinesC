@@ -8,7 +8,7 @@ using Connecte.Modele;
 
 namespace Connecte.DAL
 {
-    public class SecteurDAO
+    public class PortDAO
     {
 
         // attributs de connexion statiques
@@ -28,11 +28,10 @@ namespace Connecte.DAL
         private static MySqlCommand Ocom;
 
 
-        // Récupération de la liste des employés
-        public static List<Secteur> getSecteurs()
+        public static List<Port> getPorts()
         {
 
-            List<Secteur> lc = new List<Secteur>();
+            List<Port> lp = new List<Port>();
 
             try
             {
@@ -43,12 +42,12 @@ namespace Connecte.DAL
                 maConnexionSql.openConnection();
 
 
-                Ocom = maConnexionSql.reqExec("Select * from secteur");
+                Ocom = maConnexionSql.reqExec("Select * from port");
 
 
                 MySqlDataReader reader = Ocom.ExecuteReader();
 
-                Secteur s;
+                Port p;
 
 
 
@@ -56,11 +55,11 @@ namespace Connecte.DAL
                 while (reader.Read())
                 {
 
-                    int idSecteur = (int)reader.GetValue(0);
-                    string libelle = (string)reader.GetValue(1);
-                    s = new Secteur(idSecteur, libelle);
+                    int idPort = (int)reader.GetValue(0);
+                    string nom = (string)reader.GetValue(1);
+                    p = new Port(idPort, nom);
 
-                    lc.Add(s);
+                    lp.Add(p);
 
 
                 }
@@ -72,7 +71,7 @@ namespace Connecte.DAL
                 maConnexionSql.closeConnection();
 
                 // Envoi de la liste au Manager
-                return (lc);
+                return (lp);
 
 
             }
@@ -86,7 +85,7 @@ namespace Connecte.DAL
 
 
         }
-       
+
 
 
     }
