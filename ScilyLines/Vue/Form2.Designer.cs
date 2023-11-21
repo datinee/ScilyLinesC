@@ -46,6 +46,8 @@
             this.txtbPortA = new System.Windows.Forms.TextBox();
             this.txtbIdSecteur = new System.Windows.Forms.TextBox();
             this.listBoxPort = new System.Windows.Forms.ListBox();
+            this.label6 = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -55,7 +57,7 @@
             // 
             this.listBoxLiaison.FormattingEnabled = true;
             this.listBoxLiaison.ItemHeight = 16;
-            this.listBoxLiaison.Location = new System.Drawing.Point(274, 27);
+            this.listBoxLiaison.Location = new System.Drawing.Point(286, 47);
             this.listBoxLiaison.Name = "listBoxLiaison";
             this.listBoxLiaison.Size = new System.Drawing.Size(489, 196);
             this.listBoxLiaison.TabIndex = 0;
@@ -215,16 +217,37 @@
             // 
             this.listBoxPort.FormattingEnabled = true;
             this.listBoxPort.ItemHeight = 16;
-            this.listBoxPort.Location = new System.Drawing.Point(35, 27);
+            this.listBoxPort.Location = new System.Drawing.Point(35, 78);
             this.listBoxPort.Name = "listBoxPort";
             this.listBoxPort.Size = new System.Drawing.Size(221, 244);
             this.listBoxPort.TabIndex = 4;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(76, 36);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(125, 16);
+            this.label6.TabIndex = 5;
+            this.label6.Text = "LISTE DES PORTS";
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(458, 18);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(138, 16);
+            this.label7.TabIndex = 6;
+            this.label7.Text = "LISTE DES LIAISONS";
             // 
             // Form2
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.label7);
+            this.Controls.Add(this.label6);
             this.Controls.Add(this.listBoxPort);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox2);
@@ -239,6 +262,7 @@
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -262,5 +286,7 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.ListBox listBoxPort;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Label label7;
     }
 }
