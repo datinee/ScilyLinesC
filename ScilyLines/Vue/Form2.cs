@@ -19,9 +19,9 @@ namespace Connecte
     {
         Secteur unSec;
         Mgr monMgr;
+        List<Port> listePort ;
+        List<Liaison> listeLiaison;
 
-        List<Port> lPort = new List<Port>();
-        List<Liaison> lLia = new List<Liaison>();
 
         public Form2(Secteur s)
         {
@@ -31,16 +31,15 @@ namespace Connecte
             unSec =  s;
             Liaison l = (Liaison)listBoxLiaison.SelectedItem;
 
-            txtbIdSecteur.Text = Convert.ToString(unSec.IdSecteur);
+            txtbIdSecteur.Text = Convert.ToString(unSec.Id);
 
         }
 
         private void Form2_Load(object sender, EventArgs e)
         {
 
-
-            lLia = monMgr.chargementLiaBD(unSec);
-            lPort = monMgr.chargementPortBD();
+            listeLiaison = monMgr.chargementLiaisonBySecteur(unSec);
+            listePort = monMgr.chargementPorts();
 
             afficherLiaison();
             afficherPort();
@@ -55,7 +54,7 @@ namespace Connecte
 
 
                     listBoxLiaison.DataSource = null;
-                    listBoxLiaison.DataSource = lLia;
+                    listBoxLiaison.DataSource = listeLiaison;
                     listBoxLiaison.DisplayMember = "Description";
 
 
@@ -79,7 +78,7 @@ namespace Connecte
 
 
                 listBoxPort.DataSource = null;
-                listBoxPort.DataSource = lPort;
+                listBoxPort.DataSource = listePort;
                 listBoxPort.DisplayMember = "Description";
 
 
@@ -99,7 +98,7 @@ namespace Connecte
             Liaison l = (Liaison)listBoxLiaison.SelectedItem;
             l.Duree = txtbMajDuree.Text;
             monMgr.updateLiaison(l);
-            lLia = monMgr.chargementLiaBD(unSec);
+            listeLiaison = monMgr.chargementLiaisonBySecteur(unSec);
             afficherLiaison();
         }
 
@@ -107,18 +106,17 @@ namespace Connecte
         {
             Liaison l = (Liaison)listBoxLiaison.SelectedItem;
             monMgr.deleteLiaison(l);
-            lLia = monMgr.chargementLiaBD(unSec);
+            listeLiaison = monMgr.chargementLiaisonBySecteur(unSec);
             afficherLiaison();
         }
 
         private void btnIns_Click(object sender, EventArgs e)
         {
             Liaison l = (Liaison)listBoxLiaison.SelectedItem;
-            l.IdPortDepart = txtbPortD.Text;
-            l.IdPortArrivee = txtbPortA.Text;
+           
             l.Duree= txtbDuree.Text;
             monMgr.insertLiaison(l);
-            lLia = monMgr.chargementLiaBD(unSec);
+            listeLiaison = monMgr.chargementLiaisonBySecteur(unSec);
             afficherLiaison();
 
         }

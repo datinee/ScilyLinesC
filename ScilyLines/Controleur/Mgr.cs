@@ -13,40 +13,51 @@ namespace Connecte.Controleur
     {
 
         SecteurDAO secDAO = new SecteurDAO();
-
-        List<Secteur> maListeSecteur;
-
-        LiaisonDAO liaDao = new LiaisonDAO();
-
-        List<Liaison> maListeLiason;
-
-
+        LiaisonDAO liaisonDao = new LiaisonDAO();
         PortDAO portDAO = new PortDAO();
-        List<Port> maListePort;
+
+
+        List<Secteur> listeSecteur;
+        List<Liaison> listeLiaison;
+        List<Port> listePort;
 
 
         public Mgr()
         {
 
-            maListeSecteur = new List<Secteur>();
-            maListeLiason = new List<Liaison>();
-            maListePort = new List<Port>();
+            listeSecteur = new List<Secteur>();
+            listeLiaison = new List<Liaison>();
+            listePort = new List<Port>();
+        }
+        public List<Port> chargementPorts()
+        {
+
+            listePort = PortDAO.getPorts();
+
+            return (listePort);
         }
 
 
-
-        public List<Secteur> chargementSecBD()
+        public List<Secteur> chargementSecteurs()
         {
 
-            maListeSecteur = SecteurDAO.getSecteurs();
+            listeSecteur = SecteurDAO.getSecteurs();
 
-            return (maListeSecteur);
+            return (listeSecteur);
         }
 
-        public List<Liaison> chargementLiaBD(Secteur idSec)
+        public List<Liaison> chargementLiaisons()
         {
-            maListeLiason = LiaisonDAO.getLiaisons(idSec);
-            return (maListeLiason);
+            listeLiaison = LiaisonDAO.getLiaisons(listePort, listeSecteur);
+            return (listeLiaison);
+        }
+
+        public List<Liaison> chargementLiaisonBySecteur(Secteur sec)
+        {
+            listeSecteur = SecteurDAO.getSecteurs();
+            listePort = PortDAO.getPorts();
+            listeLiaison= LiaisonDAO.getLiaisonBySecteur(listePort, listeSecteur, sec);
+            return (listeLiaison);
         }
 
         public void updateLiaison(Liaison l)
@@ -65,12 +76,6 @@ namespace Connecte.Controleur
             LiaisonDAO.deleteLiaison(l);
         }
 
-        public List<Port> chargementPortBD()
-        {
-
-            maListePort = PortDAO.getPorts() ;
-
-            return (maListePort);
-        }
+       
     }
 }

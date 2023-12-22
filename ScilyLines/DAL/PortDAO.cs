@@ -31,7 +31,7 @@ namespace Connecte.DAL
         public static List<Port> getPorts()
         {
 
-            List<Port> lp = new List<Port>();
+            List<Port> listePorts = new List<Port>();
 
             try
             {
@@ -47,7 +47,7 @@ namespace Connecte.DAL
 
                 MySqlDataReader reader = Ocom.ExecuteReader();
 
-                Port p;
+                Port port;
 
 
 
@@ -55,11 +55,11 @@ namespace Connecte.DAL
                 while (reader.Read())
                 {
 
-                    int idPort = (int)reader.GetValue(0);
+                    int id = (int)reader.GetValue(0);
                     string nom = (string)reader.GetValue(1);
-                    p = new Port(idPort, nom);
+                    port = new Port(id, nom);
 
-                    lp.Add(p);
+                    listePorts.Add(port);
 
 
                 }
@@ -71,7 +71,7 @@ namespace Connecte.DAL
                 maConnexionSql.closeConnection();
 
                 // Envoi de la liste au Manager
-                return (lp);
+                return (listePorts);
 
 
             }

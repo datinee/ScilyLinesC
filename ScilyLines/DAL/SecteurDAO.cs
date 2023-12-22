@@ -32,7 +32,7 @@ namespace Connecte.DAL
         public static List<Secteur> getSecteurs()
         {
 
-            List<Secteur> lc = new List<Secteur>();
+            List<Secteur> listeSecteurs = new List<Secteur>();
 
             try
             {
@@ -48,7 +48,7 @@ namespace Connecte.DAL
 
                 MySqlDataReader reader = Ocom.ExecuteReader();
 
-                Secteur s;
+                Secteur secteur;
 
 
 
@@ -58,9 +58,9 @@ namespace Connecte.DAL
 
                     int idSecteur = (int)reader.GetValue(0);
                     string libelle = (string)reader.GetValue(1);
-                    s = new Secteur(idSecteur, libelle);
+                    secteur = new Secteur(idSecteur, libelle);
 
-                    lc.Add(s);
+                    listeSecteurs.Add(secteur);
 
 
                 }
@@ -72,7 +72,7 @@ namespace Connecte.DAL
                 maConnexionSql.closeConnection();
 
                 // Envoi de la liste au Manager
-                return (lc);
+                return (listeSecteurs);
 
 
             }

@@ -29,10 +29,11 @@ namespace Connecte.DAL
         private static MySqlCommand Ocom;
 
 
-        public static List<Liaison> getLiaisons(Secteur idSec)
+        public static List<Liaison> getLiaisons(List<Port> ports, List<Secteur> secteurs)
         {
 
             List<Liaison> lc = new List<Liaison>();
+            Liaison liaison;
 
             try
             {
@@ -42,13 +43,12 @@ namespace Connecte.DAL
 
                 maConnexionSql.openConnection();
 
-                ;
-                Ocom = maConnexionSql.reqExec("SELECT idLiaison, secteur.idSecteur, libelle, nom, duree FROM port join liaison JOIN secteur on idPort = idPortArrivee and liaison.idSecteur= secteur.idSecteur WHERE liaison.idSecteur= " + idSec.IdSecteur);
+
+                Ocom = maConnexionSql.reqExec("SELECT * from liaison");
 
 
                 MySqlDataReader reader = Ocom.ExecuteReader();
 
-                Liaison l;
 
 
 
@@ -56,14 +56,14 @@ namespace Connecte.DAL
                 {
 
                     int id = (int)reader.GetValue(0);
-                    int idSecteur =(int)reader.GetValue(1);
-                    string idPortDepart = (string)reader.GetValue(2);
-                    string idPortArrivee = (string)reader.GetValue(3);
+                    int secteur =(int)reader.GetValue(1);
+                    int portDepart = (int)reader.GetValue(2);
+                    int portArrivee = (int)reader.GetValue(3);
                     string duree = (string)reader.GetValue(4);
 
-                    l = new Liaison(id,idSecteur, idPortDepart, idPortArrivee, duree);
+                    liaison = new Liaison(id,secteur, portDepart, portArrivee, duree, ports, secteurs );
 
-                    lc.Add(l);
+                    lc.Add(liaison);
 
 
                 }
@@ -89,7 +89,7 @@ namespace Connecte.DAL
 
 
         }
-        public static void updateLiaison(Liaison l)
+        public static void updateLiaison(Liaison liaison)
         {
             try
             {
@@ -99,7 +99,7 @@ namespace Connecte.DAL
 
                 maConnexionSql.openConnection();
 
-                string req = "UPDATE liaison set duree = '" + l.Duree + "'Where idLiaison = " + l.Id;
+                string req = "UPDATE liaison set duree = '" + liaison.Duree + "'Where idLiaison = " + liaison.Id;
                 Ocom = maConnexionSql.reqExec(req);
 
 
@@ -111,7 +111,7 @@ namespace Connecte.DAL
             catch (Exception emp) { throw (emp);}
          }
 
-        public static void deleteLiaison(Liaison l)
+        public static void deleteLiaison(Liaison liaison)
         {
             try
             {
@@ -122,7 +122,7 @@ namespace Connecte.DAL
                 maConnexionSql.openConnection();
 
                 ;
-                Ocom = maConnexionSql.reqExec("delete from liaison where idLiaison = " + l.Id);
+                Ocom = maConnexionSql.reqExec("delete from liaison where idLiaison = " + liaison.Id);
 
 
                 int i = Ocom.ExecuteNonQuery();
@@ -131,7 +131,7 @@ namespace Connecte.DAL
             }
             catch (Exception emp) { throw (emp); }
         }
-        public static void insertLiaison(Liaison l)
+        public static void insertLiaison(Liaison liaison)
         {
             try
             {
@@ -142,7 +142,7 @@ namespace Connecte.DAL
                 maConnexionSql.openConnection();
 
                 ;
-                Ocom = maConnexionSql.reqExec("insert into Liaison(duree, idSecteur, idPortDepart, idPortArrivee) values ('"+ l.Duree + "'," + l.IdSecteur +" ," + l.IdPortDepart + "," + l.IdPortArrivee + ");");
+                Ocom = maConnexionSql.reqExec("insert into Liaison(duree, idSecteur, idPortDepart, idPortArrivee) values ('"+ liaison.Secteur.Id + "'," + liaison.  PortDepart.Id +" ," + liaison.PortArrivee.Id + "," + liaison.Duree + ");");
 
                 int i = Ocom.ExecuteNonQuery();
 
@@ -150,7 +150,36 @@ namespace Connecte.DAL
             }
             catch (Exception emp) { throw (emp); }
         }
+      public static List<Liaison> getLiaisonBySecteur(List<Port> ports, List<Secteur> secteurs, Secteur sec)
+        {
+            List<Liaison> listeLiaison = new List<Liaison>();
+            Liaison liaison;
+            try
+            {
+                maConnexionSql = ConnexionSql.getInstance(provider, dataBase, uid, mdp);
+                maConnexionSql.openConnection();
+                Ocom = maConnexionSql.reqExec("SELECT * FROM liaison where idSecteur = "+ sec.Id );
+                MySqlDataReader reader = Ocom.ExecuteReader();
+                while (reader.Read())
+                {
+                    int id = (int)reader.GetValue(0);
+                    int secteur = (int)reader.GetValue(1);
+                    int depart = (int)reader.GetValue(2);
+                    int arrivee = (int)reader.GetValue(3);
+                    string duree = (string)reader.GetValue(4);
+                    liaison = new Liaison(id, secteur, depart, arrivee, duree, ports, secteurs);
+                    listeLiaison.Add(liaison);
+                }
+                reader.Close();
+                maConnexionSql.closeConnection();
+                return listeLiaison;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
 
+        }
 
 
     }

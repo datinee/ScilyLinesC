@@ -8,29 +8,36 @@ namespace Connecte.Modele
 {
     public class Liaison
     {
-        private int idLiaison;
-        private int idSecteur;
-        private string idPortDepart;
-        private string idPortArrivee;
+        private int id;
+        private Secteur secteur;
+        private Port portDepart;
+        private Port portArrivee;
         private string duree;
+        List<Port> ports = new List<Port>();
+        List<Secteur> secteurs = new List<Secteur>();
 
-        public Liaison(int idLiaison,int idSecteur, string idPortDepart, string idPortArrivee, string duree)
+        public Liaison(int id,int idSecteur, int portDepart, int portArrivee, string duree, List<Port> ports, List<Secteur> secteurs)
         {
-            this.idLiaison = idLiaison;
-            this.idSecteur = idSecteur;
-            this.idPortDepart = idPortDepart;
-            this.idPortArrivee = idPortArrivee;
+            this.id = id;
+            this.secteur = secteurs.FirstOrDefault(p=>p.Id == idSecteur);
+            this.portDepart = ports.FirstOrDefault(p =>p.Id==portDepart);
+            this.portArrivee = ports.FirstOrDefault(p=>p.Id==portArrivee);
+            this.duree = duree;
+        }
+         public Liaison(int id, string duree)
+        {
+            this.id = id;
             this.duree = duree;
         }
 
         public string Description
         {
-            get => "Liaison n° : " + this.idLiaison + " " +" Port de Depart :" + this.idPortDepart + " " + " Port d'Arrivee :" + this.idPortArrivee + " " + " Duree :" + this.duree;
+            get => "Liaison n° : " + this.id + " " +" Port de Depart :" + portDepart.Nom + " " + " Port d'Arrivee :" + portArrivee.Nom + " " + " Duree :" + this.duree;
         }
-        public int Id { get => idLiaison; set => idLiaison = value; }
-        public string IdPortDepart { get => idPortDepart; set => idPortDepart = value; }
-        public string IdPortArrivee { get => idPortArrivee; set => idPortArrivee = value; }
+        public int Id { get => id; set => id = value; }
+        public Port  PortDepart { get => PortDepart; set => PortDepart = value; }
+        public Port PortArrivee { get => PortArrivee; set => PortArrivee = value; }
         public string Duree { get => duree; set => duree = value; }
-        public int IdSecteur { get => idSecteur; set => idSecteur = value; }
+        public Secteur Secteur { get => secteur; }
     }
 }

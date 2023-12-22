@@ -35,7 +35,7 @@ namespace Connecte
         {
 
 
-            lSec = monMgr.chargementSecBD();
+            lSec = monMgr.chargementSecteurs();
 
 
             affiche();

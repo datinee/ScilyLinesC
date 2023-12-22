@@ -8,7 +8,7 @@ namespace Connecte.Modele
 {
     public class Secteur
     {
-        private int idSecteur;
+        private int id;
         private string libelle;
 
 
@@ -16,13 +16,13 @@ namespace Connecte.Modele
         public string Libelle { get => libelle; set => libelle = value; }
 
         // remplace getId()
-        public int IdSecteur { get => idSecteur; }
+        public int Id { get => id; }
 
 
-        public Secteur(int unId, string unLibelle)
+        public Secteur(int id, string libelle)
         {
-            this.idSecteur = unId;
-            this.libelle = unLibelle;
+            this.id = id;
+            this.libelle = libelle;
         }
 
 
@@ -30,7 +30,7 @@ namespace Connecte.Modele
         // pour afficher la liste par la suite
         public string Description
         {
-            get => "Id : " + this.idSecteur + " Nom :" + this.libelle;
+            get => "Id : " + this.id + " Nom :" + this.libelle;
         }
     }
 }

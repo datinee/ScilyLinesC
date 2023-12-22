@@ -8,21 +8,21 @@ namespace Connecte.Modele
 {
     public class Port
     {
-        private int idPort;
+        private int id;
         private string nom;
          
-        public Port (int idPort, string nom)
+        public Port (int id, string nom)
         {
-            this.IdPort = idPort;
+            this.Id = id;
             this.Nom = nom;
         }
 
-        public int IdPort { get => idPort; set => idPort = value; }
+        public int Id { get => id; set => id = value; }
         public string Nom { get => nom; set => nom = value; }
 
         public string Description
         {
-            get => "Id : " + this.idPort + " Nom :" + this.nom;
+            get => "Id : " + this.id + " Nom :" + this.nom;
         }
     }
 
